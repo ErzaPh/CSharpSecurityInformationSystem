@@ -44,17 +44,39 @@ namespace CSharpSecurityInformationSystem
             Mysqlcmd = new MySqlCommand();
             Mysqlcmd.Connection = Mysqlcon;
             Mysqlcon.Open();
-            Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'";
+            Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='Admin'";
             Mysqldr = Mysqlcmd.ExecuteReader();
             if (Mysqldr.Read())
             {
+                MessageBox.Show("Access Granted Admin", "Notification", MessageBoxButtons.OK);
                 clrtxtbx();
                 frmMain frmmain = new frmMain();
                 this.Hide();
                 frmmain.Show();
+                Mysqlcon.Close();
             }
             else
             {
+                /*Mysqlcon.Close();
+                Mysqlcmd = new MySqlCommand();
+                Mysqlcmd.Connection = Mysqlcon;
+                Mysqlcon.Open();
+                Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='User'";
+                if (Mysqldr.Read())
+                {
+                    MessageBox.Show("Access Granted User", "Notification", MessageBoxButtons.OK);
+                    clrtxtbx();
+                    frmMain frmmain = new frmMain();
+                    this.Hide();
+                    frmmain.Show();
+                    Mysqlcon.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
+                    clrtxtbx();
+                    Mysqlcon.Close();
+                }*/
                 MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
                 clrtxtbx();
             }
