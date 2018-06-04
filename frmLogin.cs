@@ -13,12 +13,15 @@ namespace CSharpSecurityInformationSystem
 {
     public partial class frmLogin : Form
     {
-       constring connect = new constring();
+       constring connection = new constring();
        CryptoClass c1 = new CryptoClass();
         public frmLogin()
         {
              InitializeComponent();
         }
+        MySqlCommand Mysqlcmd;
+        MySqlConnection Mysqlcon;
+        MySqlDataReader Mysqldr;
 
         private void lblexit_Click(object sender, EventArgs e)
         {
@@ -37,16 +40,35 @@ namespace CSharpSecurityInformationSystem
 
         private void btnlgn_Click(object sender, EventArgs e)
         {
-            MySqlCommand MysqlCom = new MySqlCommand("",connect);
-            frmMain frmmain = new frmMain();
-            this.Hide();
-            frmmain.Show();
+            Mysqlcon = new MySqlConnection(constring.connect);
+            Mysqlcmd = new MySqlCommand();
+            Mysqlcmd.Connection = Mysqlcon;
+            Mysqlcon.Open();
+            Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'";
+            Mysqldr = Mysqlcmd.ExecuteReader();
+            if (Mysqldr.Read())
+            {
+                clrtxtbx();
+                frmMain frmmain = new frmMain();
+                this.Hide();
+                frmmain.Show();
+            }
+            else
+            {
+                MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
+                clrtxtbx();
+            }
+          
 
         }
-
+        public void clrtxtbx()
+        {
+            txtbxusernam.Clear();
+            txtuserpass.Clear();
+        }
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
+          
         }
     }
 }
