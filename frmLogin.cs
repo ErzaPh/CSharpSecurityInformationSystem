@@ -13,7 +13,7 @@ namespace CSharpSecurityInformationSystem
 {
     public partial class frmLogin : Form
     {
-       constring connection = new constring();
+     //  constring connection = new constring();
        CryptoClass c1 = new CryptoClass();
         public frmLogin()
         {
@@ -40,13 +40,15 @@ namespace CSharpSecurityInformationSystem
 
         private void btnlgn_Click(object sender, EventArgs e)
         {
+
             Mysqlcon = new MySqlConnection(constring.connect);
             Mysqlcmd = new MySqlCommand();
             Mysqlcmd.Connection = Mysqlcon;
             Mysqlcon.Open();
             Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='Admin'";
             Mysqldr = Mysqlcmd.ExecuteReader();
-            if (Mysqldr.Read())
+            Mysqldr.Read();
+            if (Mysqldr.HasRows == true)
             {
                 MessageBox.Show("Access Granted Admin", "Notification", MessageBoxButtons.OK);
                 clrtxtbx();
@@ -54,15 +56,19 @@ namespace CSharpSecurityInformationSystem
                 this.Hide();
                 frmmain.Show();
                 Mysqlcon.Close();
+
             }
-            else
+            else if (Mysqldr.HasRows == false)
             {
-                /*Mysqlcon.Close();
+
+                Mysqlcon.Close();
                 Mysqlcmd = new MySqlCommand();
                 Mysqlcmd.Connection = Mysqlcon;
                 Mysqlcon.Open();
                 Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='User'";
-                if (Mysqldr.Read())
+                Mysqldr = Mysqlcmd.ExecuteReader();
+                Mysqldr.Read();
+                if (Mysqldr.HasRows == true)
                 {
                     MessageBox.Show("Access Granted User", "Notification", MessageBoxButtons.OK);
                     clrtxtbx();
@@ -70,17 +76,19 @@ namespace CSharpSecurityInformationSystem
                     this.Hide();
                     frmmain.Show();
                     Mysqlcon.Close();
+
                 }
                 else
                 {
                     MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
                     clrtxtbx();
                     Mysqlcon.Close();
-                }*/
-                MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
-                clrtxtbx();
+
+                }
             }
-          
+
+           
+            
 
         }
         public void clrtxtbx()
