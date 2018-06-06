@@ -40,6 +40,8 @@ namespace CSharpSecurityInformationSystem
 
         private void btnlgn_Click(object sender, EventArgs e)
         {
+           //string usernam = c1.Encrypt(txtbxusernam.Text);
+            string userpass = c1.Encrypt(txtuserpass.Text);
             try
             {
 
@@ -60,7 +62,7 @@ namespace CSharpSecurityInformationSystem
                     Mysqlcmd = new MySqlCommand();
                     Mysqlcmd.Connection = Mysqlcon;
                     Mysqlcon.Open();
-                    Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='Admin'";
+                    Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='Admin'";
                     Mysqldr = Mysqlcmd.ExecuteReader();
                     Mysqldr.Read();
                     if (Mysqldr.HasRows == true)
@@ -80,7 +82,7 @@ namespace CSharpSecurityInformationSystem
                         Mysqlcmd = new MySqlCommand();
                         Mysqlcmd.Connection = Mysqlcon;
                         Mysqlcon.Open();
-                        Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'and user_type='User'";
+                        Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='User'";
                         Mysqldr = Mysqlcmd.ExecuteReader();
                         Mysqldr.Read();
                         if (Mysqldr.HasRows == true)
@@ -126,11 +128,7 @@ namespace CSharpSecurityInformationSystem
 
         }
 
-       // private void button1_Click(object sender, EventArgs e)
-        //{
-        //    string usernam = c1.Encrypt(txtbxusernam.Text);
-        //    string userpass = c1.Encrypt(txtuserpass.Text);
-        //    MessageBox.Show("Username MD5 Hash is: "+ usernam + "Userpass MD 5Hash is: " + userpass , "Notification",MessageBoxButtons.OK);
-       // }
-    }
+        
+
+        }
 }
