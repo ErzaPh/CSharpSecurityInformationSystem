@@ -13,7 +13,7 @@ namespace CSharpSecurityInformationSystem
 {
     public partial class frmLogin : Form
     {
-       constring connection = new constring();
+     //  constring connection = new constring();
        CryptoClass c1 = new CryptoClass();
         public frmLogin()
         {
@@ -40,25 +40,77 @@ namespace CSharpSecurityInformationSystem
 
         private void btnlgn_Click(object sender, EventArgs e)
         {
-            Mysqlcon = new MySqlConnection(constring.connect);
-            Mysqlcmd = new MySqlCommand();
-            Mysqlcmd.Connection = Mysqlcon;
-            Mysqlcon.Open();
-            Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + this.txtuserpass.Text + "'";
-            Mysqldr = Mysqlcmd.ExecuteReader();
-            if (Mysqldr.Read())
+           //string usernam = c1.Encrypt(txtbxusernam.Text);
+            string userpass = c1.Encrypt(txtuserpass.Text);
+            try
             {
-                clrtxtbx();
-                frmMain frmmain = new frmMain();
-                this.Hide();
-                frmmain.Show();
+
+
+                if (txtbxusernam.Text.Contains("/") | txtbxusernam.Text.Contains("\\") | txtbxusernam.Text.Contains("'") | txtbxusernam.Text.Contains("\""))
+                {
+                    MessageBox.Show("Some special characters are not allowed", "Notification", MessageBoxButtons.OK);
+                    clrtxtbx();
+                }
+                else if (txtbxusernam.Text == "" | txtuserpass.Text == "")
+                {
+                    MessageBox.Show("Please Fill the Username and Password", "Notification", MessageBoxButtons.OK);
+
+                }
+                else
+                {
+                    Mysqlcon = new MySqlConnection(constring.connect);
+                    Mysqlcmd = new MySqlCommand();
+                    Mysqlcmd.Connection = Mysqlcon;
+                    Mysqlcon.Open();
+                    Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='Admin'";
+                    Mysqldr = Mysqlcmd.ExecuteReader();
+                    Mysqldr.Read();
+                    if (Mysqldr.HasRows == true)
+                    {
+                        MessageBox.Show("Access Granted Admin", "Notification", MessageBoxButtons.OK);
+                        clrtxtbx();
+                        frmMain frmmain = new frmMain();
+                        this.Hide();
+                        frmmain.Show();
+                        Mysqlcon.Close();
+
+                    }
+                    else if (Mysqldr.HasRows == false)
+                    {
+
+                        Mysqlcon.Close();
+                        Mysqlcmd = new MySqlCommand();
+                        Mysqlcmd.Connection = Mysqlcon;
+                        Mysqlcon.Open();
+                        Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='User'";
+                        Mysqldr = Mysqlcmd.ExecuteReader();
+                        Mysqldr.Read();
+                        if (Mysqldr.HasRows == true)
+                        {
+                            MessageBox.Show("Access Granted User", "Notification", MessageBoxButtons.OK);
+                            clrtxtbx();
+                            frmMain frmmain = new frmMain();
+                            this.Hide();
+                            frmmain.Show();
+                            Mysqlcon.Close();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
+                            clrtxtbx();
+                            Mysqlcon.Close();
+
+                        }
+                    }
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
-                clrtxtbx();
+                MessageBox.Show("Cannot connect to the database", "Notification", MessageBoxButtons.OK);
+                Mysqlcon.Close();
             }
-          
 
         }
         public void clrtxtbx()
@@ -70,5 +122,13 @@ namespace CSharpSecurityInformationSystem
         {
           
         }
-    }
+
+        private void txtbxusernam_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+        }
 }

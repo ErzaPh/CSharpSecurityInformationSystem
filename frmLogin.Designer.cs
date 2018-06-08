@@ -143,6 +143,7 @@
             this.txtbxusernam.Size = new System.Drawing.Size(155, 27);
             this.txtbxusernam.TabIndex = 5;
             this.txtbxusernam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtbxusernam.TextChanged += new System.EventHandler(this.txtbxusernam_TextChanged);
             // 
             // lblexit
             // 

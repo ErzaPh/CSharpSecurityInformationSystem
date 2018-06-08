@@ -21,12 +21,10 @@ namespace CSharpSecurityInformationSystem
         private void btnsave_Click(object sender, EventArgs e)
         {
             MySqlConnection Mysqlcon = new MySqlConnection(constring.connect);
-            MySqlCommand Mysqlcmd = new MySqlCommand("Insert Into users (user_name,user_pass,user_type,user_fname,user_lname)VALUES(@user_name,@user_pass,@user_type,@user_fname,@user_lname)",Mysqlcon);
+            MySqlCommand Mysqlcmd = new MySqlCommand("Insert Into users (user_name,user_pass,user_type)VALUES(@user_name,@user_pass,@user_type)",Mysqlcon);
             Mysqlcmd.Parameters.AddWithValue("@user_name", txtbxusernam.Text);
             Mysqlcmd.Parameters.AddWithValue("@user_pass", EncryptClass.Encrypt(txtbxuserpass.Text));
             Mysqlcmd.Parameters.AddWithValue("@user_type", cmbxusertype.Text);
-            Mysqlcmd.Parameters.AddWithValue("@user_fname",txtbxfname.Text);
-            Mysqlcmd.Parameters.AddWithValue("@user_lname", txtbxlname.Text);
             Mysqlcon.Open();
             Mysqlcmd.ExecuteNonQuery();
             MessageBox.Show("Account Saved", "Notification", MessageBoxButtons.OK);
@@ -39,25 +37,25 @@ namespace CSharpSecurityInformationSystem
         private void clrtxtbx()
         {
             lbluserid.Text = "";
-            txtbxfname.Clear();
-            txtbxlname.Clear();
             txtbxusernam.Clear();
             txtbxuserpass.Clear();
-            cmbxusertype.Text = "";
+            //cmbxusertype.Text = "";
+            cmbxusertype.SelectedIndex = -1;
                  
         }
 
         private void UserControlAccnt_Load(object sender, EventArgs e)
         {
-          //  loadGrid();
-        
+            loadGrid();
+           
         
         }
 
         private void loadGrid() {
 
             MySqlConnection Mysqlcon = new MySqlConnection(constring.connect);
-            MySqlDataAdapter MysqlAdap = new MySqlDataAdapter("Select * From users Order by user_id", Mysqlcon);
+            //MySqlDataAdapter MysqlAdap = new MySqlDataAdapter("Select * From users Order by user_id", Mysqlcon);
+            MySqlDataAdapter MysqlAdap = new MySqlDataAdapter("Select user_id,user_name,user_type From users Order by user_id", Mysqlcon);
             DataSet datset = new DataSet();
             MysqlAdap.Fill(datset);
             dgvaccnts.DataSource = datset.Tables[0].DefaultView;
@@ -77,8 +75,6 @@ namespace CSharpSecurityInformationSystem
             txtbxusernam.Text = selectedrow.Cells[1].Value.ToString();
             txtbxuserpass.Text = selectedrow.Cells[2].Value.ToString();
             cmbxusertype.Text = selectedrow.Cells[3].Value.ToString();
-            txtbxfname.Text = selectedrow.Cells[4].Value.ToString();
-            txtbxlname.Text = selectedrow.Cells[5].Value.ToString();
         }
 
         private void btnclear_Click(object sender, EventArgs e)
