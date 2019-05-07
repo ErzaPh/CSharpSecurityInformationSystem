@@ -59,7 +59,10 @@ namespace CSharpSecurityInformationSystem
                 clrtxtbx();
             }
           
-
+           /* allquery AllQuery = new allquery();
+            int numnum = 2;
+            AllQuery.sampfunc(numnum);
+            */
         }
         public void clrtxtbx()
         {

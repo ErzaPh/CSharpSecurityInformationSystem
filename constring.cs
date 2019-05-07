@@ -10,7 +10,7 @@ namespace CSharpSecurityInformationSystem
     class constring
     {
 
-        public static string MysqlConnString = "SERVER=localhost; DATABASE= dbsecinfosystem; USERID=root; PASSWORD=fastspeed";
+        public static string MysqlConnString = "SERVER=localhost; DATABASE= dbsecinfosystem; USERID=root; PASSWORD=";
 
         public static string connect
         {
