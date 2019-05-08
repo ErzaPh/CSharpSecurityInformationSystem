@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="allquery.cs" />
     <Compile Include="constring.cs" />
     <Compile Include="CryptoClass.cs" />
     <Compile Include="frmLogin.cs">

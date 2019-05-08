@@ -111,7 +111,11 @@ namespace CSharpSecurityInformationSystem
                 MessageBox.Show("Cannot connect to the database", "Notification", MessageBoxButtons.OK);
                 Mysqlcon.Close();
             }
-
+          
+           /* allquery AllQuery = new allquery();
+            int numnum = 2;
+            AllQuery.sampfunc(numnum);
+            */
         }
         public void clrtxtbx()
         {
