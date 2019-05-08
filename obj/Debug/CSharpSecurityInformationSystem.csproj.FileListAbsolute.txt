@@ -82,3 +82,6 @@ C:\Users\John\Documents\GitHub\CSharpSecurityInformationSystem\CSharpSecurityInf
 C:\Users\John\Documents\GitHub\CSharpSecurityInformationSystem\CSharpSecurityInformationSystem\obj\Debug\CSharpSecurityInformationSystem.UserControlPos.resources
 C:\Users\John\Documents\GitHub\CSharpSecurityInformationSystem\CSharpSecurityInformationSystem\obj\Debug\CSharpSecurityInformationSystem.UserControlReports.resources
 C:\Users\John\Documents\GitHub\CSharpSecurityInformationSystem\CSharpSecurityInformationSystem\obj\Debug\CSharpSecurityInformationSystem.csproj.GenerateResource.Cache
+D:\John FIles\C#DESKTOPPROGRAMS\CSharpSecurityInformationSystem\bin\Debug\CSharpSecurityInformationSystem.exe.config
+D:\John FIles\C#DESKTOPPROGRAMS\CSharpSecurityInformationSystem\obj\Debug\CSharpSecurityInformationSystem.exe
+D:\John FIles\C#DESKTOPPROGRAMS\CSharpSecurityInformationSystem\obj\Debug\CSharpSecurityInformationSystem.pdb
