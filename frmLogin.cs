@@ -13,8 +13,8 @@ namespace CSharpSecurityInformationSystem
 {
     public partial class frmLogin : Form
     {
-     //  constring connection = new constring();
-       CryptoClass c1 = new CryptoClass();
+        //  constring connection = new constring();
+        CryptoClass EncryptClass = new CryptoClass();
         public frmLogin()
         {
              InitializeComponent();
@@ -41,11 +41,9 @@ namespace CSharpSecurityInformationSystem
         private void btnlgn_Click(object sender, EventArgs e)
         {
            //string usernam = c1.Encrypt(txtbxusernam.Text);
-            string userpass = c1.Encrypt(txtuserpass.Text);
+            string userpass = EncryptClass.Encrypt(txtuserpass.Text);
             try
             {
-
-
                 if (txtbxusernam.Text.Contains("/") | txtbxusernam.Text.Contains("\\") | txtbxusernam.Text.Contains("'") | txtbxusernam.Text.Contains("\""))
                 {
                     MessageBox.Show("Some special characters are not allowed", "Notification", MessageBoxButtons.OK);
@@ -60,9 +58,12 @@ namespace CSharpSecurityInformationSystem
                 {
                     Mysqlcon = new MySqlConnection(constring.connect);
                     Mysqlcmd = new MySqlCommand();
+                    Mysqlcmd.Parameters.AddWithValue("@user_name", txtbxusernam.Text);
+                    Mysqlcmd.Parameters.AddWithValue("@user_pass", userpass);
                     Mysqlcmd.Connection = Mysqlcon;
                     Mysqlcon.Open();
-                    Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='Admin'";
+                    //Mysqlcmd.CommandText = "Select  user_id from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='Admin'";
+                    Mysqlcmd.CommandText = "Select  user_id from dbsecinfosystem.users where user_name=@user_name and user_pass=@user_pass and user_type='Admin'";
                     Mysqldr = Mysqlcmd.ExecuteReader();
                     Mysqldr.Read();
                     if (Mysqldr.HasRows == true)
@@ -77,12 +78,13 @@ namespace CSharpSecurityInformationSystem
                     }
                     else if (Mysqldr.HasRows == false)
                     {
-
                         Mysqlcon.Close();
                         Mysqlcmd = new MySqlCommand();
+                        Mysqlcmd.Parameters.AddWithValue("@user_name", txtbxusernam.Text);
+                        Mysqlcmd.Parameters.AddWithValue("@user_pass", userpass);
                         Mysqlcmd.Connection = Mysqlcon;
                         Mysqlcon.Open();
-                        Mysqlcmd.CommandText = "Select *  from dbsecinfosystem.users where user_name='" + this.txtbxusernam.Text + "' and user_pass='" + userpass + "'and user_type='User'";
+                        Mysqlcmd.CommandText = "Select user_id  from dbsecinfosystem.users where user_name=@user_name and user_pass=@user_pass and user_type='User'";
                         Mysqldr = Mysqlcmd.ExecuteReader();
                         Mysqldr.Read();
                         if (Mysqldr.HasRows == true)
@@ -93,14 +95,12 @@ namespace CSharpSecurityInformationSystem
                             this.Hide();
                             frmmain.Show();
                             Mysqlcon.Close();
-
                         }
                         else
                         {
                             MessageBox.Show("Access Denied", "Notification", MessageBoxButtons.OK);
                             clrtxtbx();
                             Mysqlcon.Close();
-
                         }
                     }
 
@@ -111,11 +111,11 @@ namespace CSharpSecurityInformationSystem
                 MessageBox.Show("Cannot connect to the database", "Notification", MessageBoxButtons.OK);
                 Mysqlcon.Close();
             }
-          
-           /* allquery AllQuery = new allquery();
-            int numnum = 2;
-            AllQuery.sampfunc(numnum);
-            */
+
+            /* allquery AllQuery = new allquery();
+             int numnum = 2;
+             AllQuery.sampfunc(numnum);
+             */
         }
         public void clrtxtbx()
         {

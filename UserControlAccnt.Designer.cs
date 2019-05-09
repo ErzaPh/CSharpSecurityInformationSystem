@@ -30,6 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dgvaccnts = new System.Windows.Forms.DataGridView();
+            this.user_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lbluserid = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,9 +44,6 @@
             this.btndelete = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.cmbxusertype = new System.Windows.Forms.ComboBox();
-            this.user_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.user_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvaccnts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +75,27 @@
             this.dgvaccnts.Size = new System.Drawing.Size(817, 529);
             this.dgvaccnts.TabIndex = 1;
             this.dgvaccnts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvaccnts_CellDoubleClick);
+            // 
+            // user_id
+            // 
+            this.user_id.DataPropertyName = "user_id";
+            this.user_id.HeaderText = "User ID";
+            this.user_id.Name = "user_id";
+            this.user_id.ReadOnly = true;
+            // 
+            // user_name
+            // 
+            this.user_name.DataPropertyName = "user_name";
+            this.user_name.HeaderText = "Username";
+            this.user_name.Name = "user_name";
+            this.user_name.ReadOnly = true;
+            // 
+            // user_type
+            // 
+            this.user_type.DataPropertyName = "user_type";
+            this.user_type.HeaderText = "Type";
+            this.user_type.Name = "user_type";
+            this.user_type.ReadOnly = true;
             // 
             // label2
             // 
@@ -122,7 +143,7 @@
             this.txtbxusernam.Location = new System.Drawing.Point(947, 109);
             this.txtbxusernam.Name = "txtbxusernam";
             this.txtbxusernam.Size = new System.Drawing.Size(155, 27);
-            this.txtbxusernam.TabIndex = 6;
+            this.txtbxusernam.TabIndex = 1;
             this.txtbxusernam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtbxuserpass
@@ -131,7 +152,7 @@
             this.txtbxuserpass.Location = new System.Drawing.Point(947, 164);
             this.txtbxuserpass.Name = "txtbxuserpass";
             this.txtbxuserpass.Size = new System.Drawing.Size(155, 27);
-            this.txtbxuserpass.TabIndex = 6;
+            this.txtbxuserpass.TabIndex = 2;
             this.txtbxuserpass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnsave
@@ -145,7 +166,7 @@
             this.btnsave.Location = new System.Drawing.Point(868, 297);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(100, 33);
-            this.btnsave.TabIndex = 10;
+            this.btnsave.TabIndex = 4;
             this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
@@ -161,7 +182,7 @@
             this.btnupdate.Location = new System.Drawing.Point(996, 297);
             this.btnupdate.Name = "btnupdate";
             this.btnupdate.Size = new System.Drawing.Size(100, 33);
-            this.btnupdate.TabIndex = 10;
+            this.btnupdate.TabIndex = 5;
             this.btnupdate.Text = "Update";
             this.btnupdate.UseVisualStyleBackColor = false;
             this.btnupdate.Click += new System.EventHandler(this.btnupdate_Click);
@@ -177,7 +198,7 @@
             this.btndelete.Location = new System.Drawing.Point(868, 363);
             this.btndelete.Name = "btndelete";
             this.btndelete.Size = new System.Drawing.Size(100, 33);
-            this.btndelete.TabIndex = 10;
+            this.btndelete.TabIndex = 6;
             this.btndelete.Text = "Delete";
             this.btndelete.UseVisualStyleBackColor = false;
             this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
@@ -193,7 +214,7 @@
             this.btnclear.Location = new System.Drawing.Point(996, 363);
             this.btnclear.Name = "btnclear";
             this.btnclear.Size = new System.Drawing.Size(100, 33);
-            this.btnclear.TabIndex = 10;
+            this.btnclear.TabIndex = 7;
             this.btnclear.Text = "Clear";
             this.btnclear.UseVisualStyleBackColor = false;
             this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
@@ -209,28 +230,7 @@
             this.cmbxusertype.Location = new System.Drawing.Point(947, 224);
             this.cmbxusertype.Name = "cmbxusertype";
             this.cmbxusertype.Size = new System.Drawing.Size(155, 28);
-            this.cmbxusertype.TabIndex = 11;
-            // 
-            // user_id
-            // 
-            this.user_id.DataPropertyName = "user_id";
-            this.user_id.HeaderText = "User ID";
-            this.user_id.Name = "user_id";
-            this.user_id.ReadOnly = true;
-            // 
-            // user_name
-            // 
-            this.user_name.DataPropertyName = "user_name";
-            this.user_name.HeaderText = "Username";
-            this.user_name.Name = "user_name";
-            this.user_name.ReadOnly = true;
-            // 
-            // user_type
-            // 
-            this.user_type.DataPropertyName = "user_type";
-            this.user_type.HeaderText = "Type";
-            this.user_type.Name = "user_type";
-            this.user_type.ReadOnly = true;
+            this.cmbxusertype.TabIndex = 3;
             // 
             // UserControlAccnt
             // 

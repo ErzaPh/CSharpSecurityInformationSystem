@@ -47,19 +47,15 @@ namespace CSharpSecurityInformationSystem
         private void UserControlAccnt_Load(object sender, EventArgs e)
         {
             loadGrid();
-           
-        
         }
 
         private void loadGrid() {
-
             MySqlConnection Mysqlcon = new MySqlConnection(constring.connect);
             //MySqlDataAdapter MysqlAdap = new MySqlDataAdapter("Select * From users Order by user_id", Mysqlcon);
             MySqlDataAdapter MysqlAdap = new MySqlDataAdapter("Select user_id,user_name,user_type From users Order by user_id", Mysqlcon);
             DataSet datset = new DataSet();
             MysqlAdap.Fill(datset);
             dgvaccnts.DataSource = datset.Tables[0].DefaultView;
-        
     }
 
         private void btnupdate_Click(object sender, EventArgs e)
